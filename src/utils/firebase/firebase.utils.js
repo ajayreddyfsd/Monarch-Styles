@@ -84,6 +84,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   //first we make address of the doc using doc()
   //if the doc exists it must exist in this address
   const userDocRef = doc(db, "users", userAuth.uid);
+  console.log(userDocRef);
 
   //now we get the doc using the address
   const userSnapshot = await getDoc(userDocRef);
