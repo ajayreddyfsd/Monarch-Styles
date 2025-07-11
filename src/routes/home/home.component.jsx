@@ -1,5 +1,14 @@
 import Directory from "../../components/directory/directory.component";
 
+// what is this home component actually doing??????
+
+// we have a created an array of objs. each obj has imageURL for the category, title for the category, and id for the category.
+// so all of this as a bunch we are passing it to directory component through props
+// in the directory component, all it does is to create an {image and title} box for each of those objs
+// so it uses map and creates category-comp for each by passing their respective imageURL and title as prop
+// now finally, each of those category-comps, go to their respective category-comp code along with their respective
+// imageURL and title and produces a block as output which we see on the screen
+
 const Home = () => {
   const categories = [
     {
