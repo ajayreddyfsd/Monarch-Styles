@@ -6,10 +6,14 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   signInWithRedirect,
+  getRedirectResult,
   signInWithPopup,
   GoogleAuthProvider,
 } from "firebase/auth";
 
+// below imports to store the data of the users that signs in using google popup
+// getDoc to get the user-data-doc in the users-collection of the firestore-db
+// setDoc to newly create the user-data-doc in the users-collection of the firestore-db
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
 // Your web app's Firebase configuration
@@ -51,9 +55,15 @@ provider.setCustomParameters({
 //initializing the authentication
 export const auth = getAuth();
 
+//we are just making this function return itself but with arguments
+//the returned function is the one that we imported
 //this function when called, opens google sign -in as pop up
 //both above inid auth and provider go into this
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+
+//same as above but for redirect instead of popup
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, provider);
 
 //below code is for  db-firestore
 //below code is for  db-firestore
@@ -77,27 +87,31 @@ export const db = getFirestore();
  */
 export const createUserDocumentFromAuth = async (userAuth) => {
   // Safely check if userAuth?.uid exists (returns null if userAuth is undefined/null)
-  console.log(userAuth);
+  console.log("userAuth:", userAuth);
   if (!userAuth?.uid) return null; // ✅ Cleaner than explicit checks
 
   //below code is to fetch the user doc from the firestoreDB if it exists
   //first we make address of the doc using doc()
   //if the doc exists it must exist in this address
+  //users is the collection name in which docs go to
   const userDocRef = doc(db, "users", userAuth.uid);
-  console.log(userDocRef);
+  console.log("userDocRef:", userDocRef);
 
   //now we get the doc using the address
   const userSnapshot = await getDoc(userDocRef);
 
   //if user doc doesnt exist, we create doc using the inputs from userAuth
   if (!userSnapshot.exists()) {
-    const { displayName, email } = userAuth;
+    const { displayName, email, phoneNumber, photoURL, uid } = userAuth;
     const createdAt = new Date();
 
     try {
       await setDoc(userDocRef, {
+        uid,
         displayName,
         email,
+        phoneNumber,
+        photoURL,
         createdAt,
       });
     } catch (error) {

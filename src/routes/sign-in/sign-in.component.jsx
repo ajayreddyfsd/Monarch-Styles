@@ -10,11 +10,18 @@ import {
 //also give a support email
 //u can also perform 2 factor sms authentication, but need to upgrade the firebase project
 const SignIn = () => {
+  //for popup
   //simple function that waits till promise is resolved and prints the response to the console
   //u can see the response and access token in the google dev tab console
   const logGoogleUser = async () => {
-    const {user} = await signInWithGooglePopup();
-    createUserDocumentFromAuth(user);
+    const response = await signInWithGooglePopup();
+
+    //i just need the user object from the whole resposne object
+    //which we will pass to the create user function
+    //this will be userAuth for the createUserDocumentFromAuth
+    const { user: userAuth } = response;
+    console.log("user or userAuth obj of response obj:", userAuth);
+    createUserDocumentFromAuth(userAuth);
   };
 
   return (
