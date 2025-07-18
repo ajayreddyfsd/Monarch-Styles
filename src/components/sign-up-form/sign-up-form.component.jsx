@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import FormInput from "../../form-input/form-input.component";
+import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
 // import {
@@ -11,6 +11,10 @@ import Button from "../button/button.component";
 import "./sign-up-form.styles.scss";
 
 //this is for initial state initialization
+//instead of tracking all expected state variables individually,
+//we just grouped them as a single state object
+//below are initial values to that state object
+//also below are the initial values to the respective input tags as well once the component is mounted
 const defaultFormFields = {
   displayName: "",
   email: "",
@@ -19,7 +23,7 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
-  //initial state assignment
+  //state assignment and initialization
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   //destructuring the formField key-values into seperate variables
