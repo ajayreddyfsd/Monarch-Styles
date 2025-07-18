@@ -43,6 +43,11 @@ const SignUpForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    if (password.length < 6) {
+      alert("password needs to be atleast 6 chars long");
+      return;
+    }
+
     if (password !== confirmPassword) {
       alert("passwords do not match");
       return;
@@ -57,7 +62,8 @@ const SignUpForm = () => {
 
       console.log("data", formFields);
 
-      await createUserDocumentFromAuth(userAuth);
+      //passing the userAuth and formFields to store in the firestore DB
+      await createUserDocumentFromAuth(userAuth, formFields);
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
