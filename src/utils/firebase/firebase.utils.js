@@ -8,6 +8,10 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 // below imports to store the data of the users that signs in using google popup
@@ -121,3 +125,32 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   //userDocRef is the specific address of the specific doc inside the firestoreDB
   return userDocRef;
 };
+
+//below methods for signup component
+//below methods for signup component
+//below methods for signup component
+//below methods for signup component
+//below methods for signup component
+//below methods for signup component
+//below methods for signup component
+
+//below method is for new users only (or) new signups only
+// - Checks if the email already exists in the database.
+// - Returns a user object if doesnt exist.
+// - Returns an error object if the email is already in the database.
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await signInWithEmailAndPassword(auth, email, password);
+};
+
+export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);

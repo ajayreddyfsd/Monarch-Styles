@@ -3,10 +3,10 @@ import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
-// import {
-//   createAuthUserWithEmailAndPassword,
-//   createUserDocumentFromAuth,
-// } from "../../utils/firebase/firebase.utils";
+import {
+  createAuthUserWithEmailAndPassword,
+  createUserDocumentFromAuth,
+} from "../../utils/firebase/firebase.utils";
 
 import "./sign-up-form.styles.scss";
 
@@ -27,49 +27,66 @@ const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
 
   //destructuring the formField key-values into seperate variables
-  //why? to set the initial/starting form fields once the form is live
+  //why? to set the initial values for the input tags once the form is live
   const { displayName, email, password, confirmPassword } = formFields;
 
+  //to reset the form back to its initial values
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
   };
 
-  //   const handleSubmit = async (event) => {
-  //     event.preventDefault();
+  //only for new sign-ups
+  //below method checks if the email in the db or not
+  //if doesnt exist, puts the user data into the db and resets the form
+  //if exists, gives error
+  //goes into the form tag
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-  //     if (password !== confirmPassword) {
-  //       alert("passwords do not match");
-  //       return;
-  //     }
+    if (password !== confirmPassword) {
+      alert("passwords do not match");
+      return;
+    }
 
-  //     try {
-  //       const { user } = await createAuthUserWithEmailAndPassword(
-  //         email,
-  //         password
-  //       );
+    try {
+      const response = await createAuthUserWithEmailAndPassword(
+        email,
+        password
+      );
+      const { user: userAuth } = response;
 
-  //       await createUserDocumentFromAuth(user, { displayName });
-  //       resetFormFields();
-  //     } catch (error) {
-  //       if (error.code === "auth/email-already-in-use") {
-  //         alert("Cannot create user, email already in use");
-  //       } else {
-  //         console.log("user creation encountered an error", error);
-  //       }
-  //     }
-  //   };
+      console.log("data", formFields);
 
+      await createUserDocumentFromAuth(userAuth);
+      resetFormFields();
+    } catch (error) {
+      if (error.code === "auth/email-already-in-use") {
+        alert("Cannot create user, email already in use");
+      } else {
+        console.log("user creation encountered an error", error);
+      }
+    }
+  };
+
+  //this method to collect that user entered data from each input tag seperately
+  //goes into each of the input tags
   const handleChange = (event) => {
     const { name, value } = event.target;
 
+    //need to spread and update
+    //if done setFormFields({ [name]: value }), we assign a new object which has only single KV pair;
     setFormFields({ ...formFields, [name]: value });
+
+    console.log("formFields", formFields);
   };
 
   return (
     <div className="sign-up-container">
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
-      <form>
+
+      {/* simple form using imported input and button tags instead of the usual ones */}
+      <form onSubmit={handleSubmit}>
         <FormInput
           label="Display Name"
           type="text"
