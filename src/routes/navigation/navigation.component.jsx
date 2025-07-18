@@ -38,9 +38,9 @@ const Navigation = () => {
           we will display sign-out. if no current user, we will display sign-in and sign-up,
           for the user to sign-in or sign-up*/}
           {currentUser ? (
-            <span className="nav-link" onClick={signOutHandler}>
+            <Link className="nav-link" to="/sign-out" onClick={signOutHandler}>
               SIGN OUT
-            </span>
+            </Link>
           ) : (
             <div>
               <Link className="nav-link" to="/sign-in">

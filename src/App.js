@@ -6,6 +6,7 @@ import SignIn from "./routes/sign-in/sign-in.component";
 import Shop from "./routes/shop/shop.component";
 import SignUpForm from "./components/sign-up-form/sign-up-form.component";
 import { UserProvider } from "./contexts/user.context";
+import SignOut from "./routes/sign-out/sign-out.component";
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path="shop" element={<Shop />} />
           <Route path="sign-in" element={<SignIn />} />
           <Route path="sign-up" element={<SignUpForm />} />
+          <Route path="sign-out" element={<SignOut />} />
         </Route>
       </Routes>
     </UserProvider>
