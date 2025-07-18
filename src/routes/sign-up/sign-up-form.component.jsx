@@ -1,7 +1,9 @@
 import { useState } from "react";
 
 import FormInput from "../../components/form-input/form-input.component";
-import Button from "../../components/button/button.component";
+import Button, {
+  BUTTON_TYPE_CLASSES,
+} from "../../components/button/button.component";
 
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context"; // adjust path as needed
@@ -9,6 +11,7 @@ import { UserContext } from "../../contexts/user.context"; // adjust path as nee
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
+  signUpWithGooglePopup,
 } from "../../utils/firebase/firebase.utils";
 
 import "./sign-up-form.styles.scss";
@@ -39,6 +42,17 @@ const SignUpForm = () => {
   //to reset the form back to its initial values
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
+  };
+
+  //for signups using google
+  const signUpWithGoogle = async () => {
+    const { user } = await signUpWithGooglePopup();
+
+    //storing the user data that signed in using google
+    await createUserDocumentFromAuth(user);
+
+    //setting the global context
+    setCurrentUser(user);
   };
 
   //only for new sign-ups
@@ -134,9 +148,19 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <Button type="submit" buttonType="google">
-          Sign Up
-        </Button>
+
+        {/* 2 options for the user to sign-up
+        normal sign-up and sign-up through google */}
+        <div className="buttons-container">
+          <Button type="submit">Sign Up</Button>
+          <Button
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            type="button"
+            onClick={signUpWithGoogle}
+          >
+            Sign Up With Google
+          </Button>
+        </div>
       </form>
     </div>
   );

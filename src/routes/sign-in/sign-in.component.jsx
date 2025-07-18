@@ -60,8 +60,11 @@ const SignIn = () => {
         case "auth/user-not-found":
           alert("no user associated with this email");
           break;
+        case "auth/invalid-credential":
+          alert("Invalid Credentials");
+          break;
         default:
-          console.log(error);
+          console.log(error.code);
       }
     }
   };

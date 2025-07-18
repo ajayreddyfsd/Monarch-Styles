@@ -63,7 +63,7 @@ export const auth = getAuth();
 //this function when called, opens google sign -in as pop up
 //both above inid auth and provider go into this
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
-
+export const signUpWithGooglePopup = () => signInWithPopup(auth, provider);
 //same as above but for redirect instead of popup
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, provider);
@@ -146,8 +146,6 @@ export const createAuthUserWithEmailAndPassword = async (email, password) => {
   return await createUserWithEmailAndPassword(auth, email, password);
 };
 
-
-
 //this is for sign-ins
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
@@ -157,7 +155,6 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
 //to signout the user
 export const signOutUser = async () => await signOut(auth);
-
 
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
