@@ -1,10 +1,11 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 
 import FormInput from "../../components/form-input/form-input.component";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../components/button/button.component";
 import { UserContext } from "../../contexts/user.context";
+import { useContext } from "react";
 
 import {
   signInAuthUserWithEmailAndPassword,
@@ -34,8 +35,9 @@ const SignIn = () => {
 
     //storing the user data that signed in using google
     await createUserDocumentFromAuth(user);
+
+    //setting the global context
     setCurrentUser(user);
-    resetFormFields();
   };
 
   const handleSubmit = async (event) => {
@@ -46,6 +48,8 @@ const SignIn = () => {
         email,
         password
       );
+
+      //setting the global context
       setCurrentUser(user);
       resetFormFields();
     } catch (error) {

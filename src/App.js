@@ -4,7 +4,7 @@ import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component";
 import SignIn from "./routes/sign-in/sign-in.component";
 import Shop from "./routes/shop/shop.component";
-import SignUpForm from "./components/sign-up-form/sign-up-form.component";
+import SignUpForm from "./routes/sign-up/sign-up-form.component";
 import { UserProvider } from "./contexts/user.context";
 import SignOut from "./routes/sign-out/sign-out.component";
 

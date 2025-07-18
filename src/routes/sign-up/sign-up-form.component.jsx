@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import FormInput from "../form-input/form-input.component";
-import Button from "../button/button.component";
+import FormInput from "../../components/form-input/form-input.component";
+import Button from "../../components/button/button.component";
 
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context"; // adjust path as needed
