@@ -138,7 +138,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData) => {
 
 //below method is for new users only (or) new signups only
 // - Checks if the email already exists in the database.
-// - Returns a user object if doesnt exist.
+// - Returns a user object if user doesnt exist and stores it in the db.
 // - Returns an error object if the email is already in the database.
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
@@ -152,6 +152,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   return await signInWithEmailAndPassword(auth, email, password);
 };
 
+//to signout the user
 export const signOutUser = async () => await signOut(auth);
 
 export const onAuthStateChangedListener = (callback) =>

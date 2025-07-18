@@ -1,11 +1,21 @@
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 
 import "./navigation.styles.scss";
+import { UserContext } from "../../contexts/user.context";
 
 const Navigation = () => {
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  console.log("CURRENT USER: ", currentUser);
+
+  const signOutHandler = async () => {
+    await signOutUser();
+    setCurrentUser(null);
+  };
+
   return (
     //these are just a group of links
     //first one is an image based link for the logo
@@ -23,9 +33,24 @@ const Navigation = () => {
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
-          <Link className="nav-link" to="/sign-in">
-            SIGN IN
-          </Link>
+
+          {/* if we have any current user in the global context,
+          we will display sign-out. if no current user, we will display sign-in and sign-up,
+          for the user to sign-in or sign-up*/}
+          {currentUser ? (
+            <span className="nav-link" onClick={signOutHandler}>
+              SIGN OUT
+            </span>
+          ) : (
+            <div>
+              <Link className="nav-link" to="/sign-in">
+                SIGN IN
+              </Link>
+              <Link className="nav-link" to="/sign-up">
+                SIGN UP
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <Outlet />

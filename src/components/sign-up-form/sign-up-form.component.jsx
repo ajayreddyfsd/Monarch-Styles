@@ -3,6 +3,9 @@ import { useState } from "react";
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 
+import { useContext } from "react";
+import { UserContext } from "../../contexts/user.context"; // adjust path as needed
+
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -29,6 +32,9 @@ const SignUpForm = () => {
   //destructuring the formField key-values into seperate variables
   //why? to set the initial values for the input tags once the form is live
   const { displayName, email, password, confirmPassword } = formFields;
+
+  //once the user signsup, we gonna set the context's user as the user
+  const { setCurrentUser } = useContext(UserContext);
 
   //to reset the form back to its initial values
   const resetFormFields = () => {
@@ -58,12 +64,12 @@ const SignUpForm = () => {
         email,
         password
       );
-      const { user: userAuth } = response;
 
-      console.log("data", formFields);
+      const { user: userAuth } = response;
 
       //passing the userAuth and formFields to store in the firestore DB
       await createUserDocumentFromAuth(userAuth, formFields);
+      setCurrentUser(userAuth);
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
