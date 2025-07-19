@@ -6,20 +6,23 @@ import SignIn from "./routes/sign-in/sign-in.component";
 import Shop from "./routes/shop/shop.component";
 import SignUpForm from "./routes/sign-up/sign-up-form.component";
 import { UserProvider } from "./contexts/user.context";
+import { ProductsProvider } from "./contexts/products.context";
 import SignOut from "./routes/sign-out/sign-out.component";
 
 const App = () => {
   return (
     <UserProvider>
-      <Routes>
-        <Route path="/" element={<Navigation />}>
-          <Route path="home" element={<Home />} />
-          <Route path="shop" element={<Shop />} />
-          <Route path="sign-in" element={<SignIn />} />
-          <Route path="sign-up" element={<SignUpForm />} />
-          <Route path="sign-out" element={<SignOut />} />
-        </Route>
-      </Routes>
+      <ProductsProvider>
+        <Routes>
+          <Route path="/" element={<Navigation />}>
+            <Route path="home" element={<Home />} />
+            <Route path="shop" element={<Shop />} />
+            <Route path="sign-in" element={<SignIn />} />
+            <Route path="sign-up" element={<SignUpForm />} />
+            <Route path="sign-out" element={<SignOut />} />
+          </Route>
+        </Routes>
+      </ProductsProvider>
     </UserProvider>
   );
 };
