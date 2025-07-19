@@ -136,6 +136,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData) => {
 //below methods for signup component
 //below methods for signup component
 
+//this is for sign-ups
 //below method is for new users only (or) new signups only
 // - Checks if the email already exists in the database.
 // - Returns a user object if user doesnt exist and stores it in the db.
@@ -156,5 +157,10 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 //to signout the user
 export const signOutUser = async () => await signOut(auth);
 
+// This function wraps Firebase's onAuthStateChanged
+// It takes a callback and runs it whenever the user's auth state changes (login, logout, etc.)
+// we use this function in the context code
+// so whenever the auth state changes, the callback gets executed
+// the below method and the useEffect in context work hand in hand to track auth state and maintain it globally
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);

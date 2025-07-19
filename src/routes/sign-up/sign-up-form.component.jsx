@@ -5,9 +5,6 @@ import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../../components/button/button.component";
 
-import { useContext } from "react";
-import { UserContext } from "../../contexts/user.context"; // adjust path as needed
-
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -36,9 +33,6 @@ const SignUpForm = () => {
   //why? to set the initial values for the input tags once the form is live
   const { displayName, email, password, confirmPassword } = formFields;
 
-  //once the user signsup, we gonna set the context's user as the user
-  const { setCurrentUser } = useContext(UserContext);
-
   //to reset the form back to its initial values
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -50,9 +44,6 @@ const SignUpForm = () => {
 
     //storing the user data that signed in using google
     await createUserDocumentFromAuth(user);
-
-    //setting the global context
-    setCurrentUser(user);
   };
 
   //only for new sign-ups
@@ -83,7 +74,6 @@ const SignUpForm = () => {
 
       //passing the userAuth and formFields to store in the firestore DB
       await createUserDocumentFromAuth(userAuth, formFields);
-      setCurrentUser(userAuth);
       resetFormFields();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {

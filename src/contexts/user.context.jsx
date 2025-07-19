@@ -1,6 +1,11 @@
 // This code creates a React Context for storing user information (currentUser) globally in your app
 
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
+
+import {
+  onAuthStateChangedListener,
+  createUserDocumentFromAuth,
+} from "../utils/firebase/firebase.utils";
 
 //this the context or global storage box that we created
 //stores currentUser, for now it is null
@@ -17,6 +22,22 @@ export const UserContext = createContext({
 export const UserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const value = { currentUser, setCurrentUser };
+
+  // When the app loads, this sets up a listener to watch for changes in the user's auth status.
+  // If the user logs in or logs out, we update currentUser in our context.
+  // This keeps the whole app in sync with the user's login state.
+  // the below function and the OAuth in firebase util work hand in hand to track auth state and maintain it globally
+  // instead of tracking it everywhere, we will track at one centralized place
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) {
+        createUserDocumentFromAuth(user);
+      }
+      setCurrentUser(user);
+    });
+
+    return unsubscribe; // Clean up the listener when the component unmounts
+  }, []);
 
   //this is the heart
   //which lets data accessible to all the other components
