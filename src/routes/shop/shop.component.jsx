@@ -6,6 +6,7 @@ import "./shop.styles.scss";
 
 const Shop = () => {
   //getting the products data from the global products context
+  //and not from the json file
   const { products } = useContext(ProductsContext);
   console.log("products", products);
 

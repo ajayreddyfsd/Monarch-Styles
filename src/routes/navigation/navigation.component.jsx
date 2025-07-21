@@ -7,6 +7,7 @@ import { signOutUser } from "../../utils/firebase/firebase.utils";
 import "./navigation.styles.scss";
 
 const Navigation = () => {
+  //getting the user auth status from the stored global context
   const { currentUser } = useContext(UserContext);
   console.log("CURRENT USER: ", currentUser);
 
@@ -20,9 +21,11 @@ const Navigation = () => {
     //where they are supposed to go in the parent route
     <Fragment>
       <div className="navigation">
+        {/* the first one is an image based link */}
         <Link className="logo-container" to="/">
           <CrwnLogo className="logo" />
         </Link>
+
         <div className="nav-links-container">
           <Link className="nav-link" to="/home">
             HOME
@@ -50,9 +53,16 @@ const Navigation = () => {
           )}
         </div>
       </div>
+
+      {/* specifying the desginated place to go to for the nested routes */}
       <Outlet />
     </Fragment>
   );
 };
 
 export default Navigation;
+
+//todo: also, why no component imports in the navigation comp, how do the Link tags work w/o component imports
+
+//todo: Link tag must have to attr set, or else error
+//todo: if u wanna use Link-tag without to-attr, then use span-tag with onClick-attr

@@ -1,3 +1,5 @@
+// TODO: i got the below starter code dreictly from the firebase project created on the website
+
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -62,6 +64,7 @@ export const auth = getAuth();
 //the returned function is the one that we imported
 //this function when called, opens google sign -in as pop up
 //both above inid auth and provider go into this
+//one for signin and another for signup
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 export const signUpWithGooglePopup = () => signInWithPopup(auth, provider);
 //same as above but for redirect instead of popup

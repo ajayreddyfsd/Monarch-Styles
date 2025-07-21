@@ -11,6 +11,11 @@ export const ProductsContext = createContext({
   setProducts: () => null,
 });
 
+//first make the above context variables, the state variables too
+//then initialize them and make the value ready
+//and then
+//pass it to everyone
+
 export const ProductsProvider = ({ children }) => {
   //initializing the products
   const [products, setProducts] = useState(PRODUCTS);

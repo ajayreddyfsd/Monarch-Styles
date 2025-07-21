@@ -11,6 +11,7 @@ import SignOut from "./routes/sign-out/sign-out.component";
 
 const App = () => {
   return (
+    //wrapping inside the create global contexts
     <UserProvider>
       <ProductsProvider>
         <Routes>

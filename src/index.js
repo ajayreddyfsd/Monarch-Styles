@@ -11,7 +11,11 @@ const rootElement = document.getElementById("root");
 // UserProvider is the context wrapper component used for the context,
 // we need to wrap the whole App.js inside this UserProvider component,
 // why? so that context's global data can be accessed by all the other components
+// same with ProductsProvider
 render(
+  //wrapping in routers
+  //and
+  //wrapping inside the created global contexts
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>

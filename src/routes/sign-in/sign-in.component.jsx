@@ -37,11 +37,13 @@ const SignIn = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
+      const { user: userAuth } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
 
+      //passing the userAuth and formFields to store in the firestore DB
+      await createUserDocumentFromAuth(userAuth, formFields);
       resetFormFields();
     } catch (error) {
       switch (error.code) {
@@ -107,3 +109,6 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+//Todo: why different button types and why different submission types and how we know which one to use
+//todo: answer in misc-folder of react notes

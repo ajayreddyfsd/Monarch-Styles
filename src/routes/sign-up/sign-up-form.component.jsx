@@ -157,3 +157,6 @@ const SignUpForm = () => {
 };
 
 export default SignUpForm;
+
+//Todo: why different button types and why different submission types and how we know which one to use
+//todo: answer in misc-folder of react notes
