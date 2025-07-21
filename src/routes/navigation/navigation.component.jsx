@@ -3,13 +3,16 @@ import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import { UserContext } from "../../contexts/user.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
+import { CartContext } from "../../contexts/cart.context";
+import CartIcon from "../../components/cart-icon/cart-icon.component";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 
 import "./navigation.styles.scss";
 
 const Navigation = () => {
   //getting the user auth status from the stored global context
   const { currentUser } = useContext(UserContext);
-  console.log("CURRENT USER: ", currentUser);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     //these are just a group of links
@@ -51,10 +54,13 @@ const Navigation = () => {
               </Link>
             </div>
           )}
-        </div>
-      </div>
 
-      {/* specifying the desginated place to go to for the nested routes */}
+          {/* this is a simple component showing an image and an item-count at its centre, styled that way */}
+          <CartIcon />
+        </div>
+        {/* below we are displaying the card dropdown menu, but only when the cart is open, which we get to know from the global card comtext */}
+        {isCartOpen && <CartDropdown />}
+      </div>
       <Outlet />
     </Fragment>
   );
@@ -62,7 +68,7 @@ const Navigation = () => {
 
 export default Navigation;
 
-//todo: also, why no component imports in the navigation comp, how do the Link tags work w/o component imports
+//!: also, why no component imports in the navigation comp, how do the Link tags work w/o component imports
 
-//todo: Link tag must have to attr set, or else error
-//todo: if u wanna use Link-tag without to-attr, then use span-tag with onClick-attr
+//!: Link tag must have to attr set, or else error
+//!: if u wanna use Link-tag without to-attr, then use span-tag with onClick-attr
