@@ -17,14 +17,17 @@ const CartDropdown = () => {
   const navigate = useNavigate();
 
   const goToCheckoutHandler = () => {
-    //! why not call useNavigate() here directly, why r we declaring abouve and calling it here
-    //! coz of react hooks 101
-    //! inside any component, hook always needs to be called at the top level and not inside nested function
-    //! thats why we are calling it in top level as above, but using it in this nested function smartly
+    //! Why not call useNavigate() directly here?
+    //! Because of React Hooks Rule #1:
+    //! Hooks must be called at the top level of a component, not inside nested functions or conditionals.
+    //! That's why we call useNavigate() once at the top of the component,
+    //! and then use the navigate function inside this handler when needed.
 
-    //! also why not use simply Link-tag, why useNavigate()
-    //! if u just want internal navigation, use Link tag
-    //! if u need to do something before the navigation, make a function like this to do whatever u wanna do and then use useNavigate for internal navigation
+    //! Also, why not just use a <Link> tag?
+    //! If you only need simple internal navigation, use a <Link to="..."> — it's clean and declarative.
+    //! But if you need to perform logic or side effects (e.g., check cart, track event) before navigating,
+    //! then define a function like this and use navigate() programmatically.
+
     navigate("/checkout");
   };
 
