@@ -8,6 +8,7 @@ import { UserProvider } from "./contexts/user.context";
 import { ProductsProvider } from "./contexts/products.context";
 import SignOut from "./routes/sign-out/sign-out.component";
 import { CartProvider } from "./contexts/cart.context";
+import Checkout from "./routes/checkout/checkout.component";
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
               <Route path="sign-in" element={<SignIn />} />
               <Route path="sign-up" element={<SignUpForm />} />
               <Route path="sign-out" element={<SignOut />} />
+              <Route path="checkout" element={<Checkout />} />
             </Route>
           </Routes>
         </CartProvider>
