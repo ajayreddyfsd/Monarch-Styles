@@ -11,6 +11,7 @@ import "./cart-icon.styles.scss";
 //cart-item is the item that does into cart dropdown
 const CartIcon = () => {
   const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const { cartItemCount, setCartItemCount } = useContext(CartContext);
 
   //!below function is the main for toggling the cart icon
   //!once the div is clicked, the function activates, and sets the variable to the opposite of what it was
@@ -22,7 +23,7 @@ const CartIcon = () => {
     // this component, we will use in the navigation component
     <div className="cart-icon-container" onClick={toggleIsCartOpen}>
       <ShoppingIcon className="shopping-icon" />
-      <span className="item-count">0</span>
+      <span className="item-count">{cartItemCount}</span>
     </div>
   );
 };
