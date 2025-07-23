@@ -12,6 +12,7 @@ export const BUTTON_TYPE_CLASSES = {
 //   children: "Sign In with Google"
 // }
 
+//this component is same as button-tag in html but more customized, we use this comp in both sign-in and sign-out routes
 const Button = ({ children, buttonType, ...otherProps }) => {
   return (
     <button

@@ -1,5 +1,6 @@
 import './category-item.styles.scss';
 
+//we use this comp in the home page to display all the shopping categories
 const CategoryItem = ({ category }) => {
   const { imageUrl, title } = category;
   return (

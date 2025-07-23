@@ -21,6 +21,7 @@ import "./form-input.styles.scss";
 //   required: true
 // }
 
+//this component is same as input-tag in html but more customized, we use this comp in both sign-in and sign-out routes
 const FormInput = ({ label, ...otherProps }) => {
   return (
     <div className="group">
