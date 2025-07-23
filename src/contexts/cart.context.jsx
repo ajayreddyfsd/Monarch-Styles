@@ -44,6 +44,10 @@ export const updateCart = (cartItems, productToAdd) => {
   return cartItemsUpdated;
 };
 
+//! in the above function, why dont we just extract the item by id, edit it and then add it back to same place where it belongs?
+//! coz, changing the original array directly wont render changes, and makes code less declarative, breaking one of react's rules
+//! so mutating through array methods is the safe and preferred method
+
 export const CartContext = createContext({
   isCartOpen: false,
   setIsCartOpen: () => null,
