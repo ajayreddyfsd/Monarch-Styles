@@ -4,6 +4,11 @@ import { CartContext } from "../../contexts/cart.context";
 
 import "./cart-icon.styles.scss";
 
+//there are three components
+//cart-icon, cart-dropdown, cart-item
+//cart-icon is what is displayed on the webpage once user signs in
+//cart-dropdown is shown is when user clicks the cart icon, in a toggling way
+//cart-item is the item that does into cart dropdown
 const CartIcon = () => {
   const { isCartOpen, setIsCartOpen } = useContext(CartContext);
 
